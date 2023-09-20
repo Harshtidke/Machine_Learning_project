@@ -10,19 +10,18 @@ import os, sys
 
 class Pipeline:
 
-    def __init__(self, config : Configuration = Configuration())-> None:
+    def __init__(self, config : Configuration = Configuration)-> None:
         try:
-            self.config = config
+            self.config = Configuration()
         except Exception as e:
             raise HousingException(e,sys) from e
         
-    def start_data_ingestion(self)-> DataIngestionArtifact:
+    def start_data_ingestion(self) -> DataIngestionArtifact:
         try:
-            data_ingestion = DataIngestion(data_ingestion_config = self.config.get_data_ingestion_config())
-
+            data_ingestion = DataIngestion(data_ingestion_config=self.config.get_data_ingestion_config())
             return data_ingestion.initiate_data_ingestion()
         except Exception as e:
-            raise HousingException(e,sys) from e
+            raise HousingException(e, sys) from e
         
     def start_data_validation(self):
         pass
@@ -43,6 +42,5 @@ class Pipeline:
         try:
             # Data ingestion
             data_ingestion_artifact = self.start_data_ingestion()
-
         except Exception as e:
             raise HousingException(e,sys) from e 

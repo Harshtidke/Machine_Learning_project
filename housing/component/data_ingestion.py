@@ -11,12 +11,12 @@ from sklearn.model_selection import StratifiedShuffleSplit
 
 class DataIngestion:
 
-    def __init__(self, data_ingestion_config:DataIngestionConfig ):
+    def __init__(self, data_ingestion_config : DataIngestionConfig):
         try:
-            logging.info(f"{'='*20}Data Ingestion log started.{'='*20}")
+            logging.info(f"{'>>'*20}Data Ingestion log started.{'<<'*20}")
             self.data_ingestion_config = data_ingestion_config
         except Exception as e: 
-            raise HousingException(e, sys) 
+            raise HousingException(e, sys)
         
     def download_housing_data(self)-> str:
         try:
@@ -36,7 +36,7 @@ class DataIngestion:
             tgz_file_path = os.path.join(tgz_download_dir, housing_file_name)
 
             logging.info(f"Downloading file from :[{download_url}] into :[{tgz_file_path}]")
-            urllib.request.urlretrieve(download_url< tgz_file_path)
+            urllib.request.urlretrieve(download_url, tgz_file_path)
             logging.info(f"File :[{tgz_file_path}] has been downloaded successfully.")
             return tgz_file_path
 
@@ -69,7 +69,6 @@ class DataIngestion:
             housing_file_path = os.path.join(raw_data_dir,file_name)
 
             logging.info(f"Reading csv file: [{housing_file_path}]")
-
             housing_data_frame = pd.read_csv(housing_file_path)
 
             housing_data_frame["income_category"] = pd.cut(
@@ -122,5 +121,5 @@ class DataIngestion:
             raise HousingException(e,sys) from e
 
 
-def __del__(self):
-    logging.info(f"{'='*20}Data Ingestion log completed.{'='*20} \n\n")
+    def __del__(self):
+        logging.info(f"{'>>'*20}Data Ingestion log completed.{'<<'*20} \n\n")
